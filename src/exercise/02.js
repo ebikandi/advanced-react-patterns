@@ -9,11 +9,9 @@ function Toggle({children}) {
   const toggle = () => setOn(!on)
 
   return React.Children.map(children, child => {
-    const isReactCompontent = typeof child.type === 'function'
-
-    const extraProps = isReactCompontent ? {on, toggle} : {}
-
-    return React.cloneElement(child, extraProps)
+    return typeof child.type === 'string'
+      ? child
+      : React.cloneElement(child, {on, toggle})
   })
 }
 
